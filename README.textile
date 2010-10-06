@@ -1,0 +1,73 @@
+h1. bash-up: a versatile bash and environment setup utility
+
+_bash-up_ is a collection of well-organized configuration files for your command-line environment and @bash@ configuration.
+
+The objective of _bash-up_ is to provide a *unique* set of configuration files that you can deploy on as many computer as you like, whatever their system (as long as it is somewhat *NIX and @bash@ compliant).
+
+h2. Principles
+
+h3. Using @.profile@ and @.bashrc@ only as loaders of many many other files...
+
+In the _bash-up_ approach, the @.profile@ and @.bashrc@ files don't so anything but _sourcing_ other configuration files in your _bash-up_ directory.
+
+You will not declare *any* variable, alias or function in those two files.
+
+*Why oh why ?* Let's read next section...
+
+h3. A hierarchy of generic-to-specific files
+
+All configuration files for _bash-up_ are organized by *sections* (e.g. _aliases_, _functions_, _completion_, etc.) so you can easily organize them.
+
+For each section, files are *common* to all systems and all hosts (these are the files placed directly in a *section* directory), or *system-specific* (when placed in a *system* directory, e.g. _Linux_, _Darwin_ or whatever @uname -s@ may return), or *host-specific* (when placed in a *host* directory,
+using the output of @hostname -s@ to determine the current machine).
+
+Have a look at this example:
+
+<pre>
+bash-it/
+|- aliases/
+   |- aliases_one
+   |- some_more
+   |- Linux
+   |  |- linux_aliases
+   |- Darwin
+      |- macosx_aliases
+      |- machine_2/
+      |  |- specific_aliases
+      |  |- the_more_the_better
+      |- machine_3/
+         |- for_machine_3
+</pre>
+
+Consider me having three computers (_lucky me!_):
+* @machine_1@, a good old desktop running Linux
+* @machine_2@, a MacBook Pro running Mac OS X
+* @machine_3@, an iMac running Mac OS X
+
+The files @aliases_one@ and @some_more@ will apply to all three machines (these are the *common* files).
+
+@linux_aliases@ will only apply to @machine_1@, as it is the only machine running Linux.
+
+@macosx_aliases@ will apply to both @machine_2@ and @machine_3@ (as they run Mac OS X). @specific_aliases@ and @the_more_the_better@ will apply to @machine_2@ *only*, as *host-specific* files and @for_machine_3@ is naturally loaded only on @machine_3@.
+
+Note that the actual name of the file doesn't matter, so *feel free to name them to whatever you think is relevant!*
+
+Another good principle is that *don't fear to split your configuration in as many files as you want!*
+
+h4. What if...
+
+*What if, say @machine_2@ dual-boots on both Mac OS X and Linux ?*
+Okay, create a @machine_3@ *host* directory under the @Linux@ *system* directory and create there *symbolic links* for all relevant configuration files.
+
+*What if I want some more specific system discriminant, like the OS version or the distribution?*
+Err,... I thought of it (hey, that's the proof!) but I'll work on it for future releases.
+
+h2. Credits and references
+
+This project is freely inspired by other contributions such as "oh-my-zsh":http://github.com/robbyrussell/oh-my-zsh or "bash-it":http://github.com/revans/bash-it.
+
+Try them, use them, keep with them if you feel they fulfill your needs better.
+
+h2. License
+
+This program is licensed under the "GNU GPL v.3":http://www.gnu.org/licenses/gpl.html license. See previous link or the file @gpl-3.0.txt@ for further details.
