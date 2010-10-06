@@ -30,7 +30,6 @@ export BU_HOSTNAME=`hostname -s`
 function source_all_sections () {
 	find $BU_DIRECTORY/* -type d -maxdepth 0 | grep -Ev "profile$" | while read SECTION;
 	do
-		echo `basename $SECTION`
 		source_section `basename $SECTION`
 	done
 }
@@ -61,7 +60,7 @@ function source_dir () {
 	if [ -d $1 ]; then
 		find $1 -type f -maxdepth 1 | while read FILE
 		do
-			echo "$FILE"
+			source "$FILE"
 		done
 	fi
 }
@@ -74,7 +73,7 @@ function source_bashrc () {
 	for BASHFILE in $HOME/.bashrc $HOME/.bash_profile;
 	do
 		if [ -f $BASHFILE ]; then
-			echo $BASHFILE
+			source $BASHFILE
 			found=1
 		fi
 	done
