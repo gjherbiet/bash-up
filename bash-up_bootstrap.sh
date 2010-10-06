@@ -44,16 +44,16 @@ function source_section () {
 	if [ -z $1 ]; then
 		fail "source_matching_files requires the section name to be given as argument" 2
 	fi
-	source_files $BU_DIRECTORY/$1
-	source_files $BU_DIRECTORY/$1/$BU_SYSTEM
-	source_files $BU_DIRECTORY/$1/$BU_SYSTEM/$BU_HOSTNAME
+	source_dir $BU_DIRECTORY/$1
+	source_dir $BU_DIRECTORY/$1/$BU_SYSTEM
+	source_dir $BU_DIRECTORY/$1/$BU_SYSTEM/$BU_HOSTNAME
 }
 
 #
 # Source the files of the given directory
 # @param path of directory to browse
 #
-function source_files () {
+function source_dir () {
 	if [ -z $1 ]; then
 		fail "source_files requires the directory path to be given as argument" 2
 	fi
