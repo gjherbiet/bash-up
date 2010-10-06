@@ -26,12 +26,12 @@
 export BU_DIRECTORY=$HOME/Development/bash-up
 
 #
-# Bootstrap bash-up
+# Load bash-up
 #
-if [ -f $BU_DIRECTORY/bash-up_bootstrap.sh ]; then
-	source $BU_DIRECTORY/bash-up_bootstrap.sh
+if [ -f $BU_DIRECTORY/bash-up.sh ]; then
+	source $BU_DIRECTORY/bash-up.sh
 else
-	echo "[bash-up] Error: bash-up main setup file $BU_DIRECTORY/bash-up_bootstrap.sh not found" >&2
+	echo "[bash-up] Error: bash-up main setup file $BU_DIRECTORY/bash-up.sh not found" >&2
 	exit 1;
 fi
 
