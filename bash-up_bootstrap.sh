@@ -25,6 +25,17 @@ export BU_SYSTEM=`uname -s`
 export BU_HOSTNAME=`hostname -s`
 
 #
+# Source all the sections (except the profile section)
+#
+function source_all_sections () {
+	find $BU_DIRECTORY/* -type d -maxdepth 0 | grep -Ev "profile$" | while read SECTION;
+	do
+		echo `basename $SECTION`
+		source_section `basename $SECTION`
+	done
+}
+
+#
 # Function to load all the files required by this particular machine
 # under the requested section
 # @param section name
