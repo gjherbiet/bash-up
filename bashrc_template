@@ -1,0 +1,41 @@
+############################################################################
+# Copyright 2010 Guillaume-Jean Herbiet
+# <guillaume-jean@herbiet.net> - <http://www.herbiet.net>
+# 
+# This file is part of bash-up.
+# 
+# bash-up is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# bash-up is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with bash-up.  If not, see <http://www.gnu.org/licenses/>.
+############################################################################
+
+#
+# Define and export the bash-up directory.
+# You only need to change this if you moved your bash-up installation dir.
+# TODO: set this by an install script.
+#
+export BU_DIRECTORY=$HOME/Development/bash-up
+
+#
+# Load bash-up
+#
+if [ -f $BU_DIRECTORY/bash-up.sh ]; then
+	source $BU_DIRECTORY/bash-up.sh
+else
+	echo "[bash-up] Error: bash-up main setup file $BU_DIRECTORY/bash-up.sh not found" >&2
+	exit 1;
+fi
+
+#
+# Simply load all the matching files for the categories you have defined
+#
+source_all_sections
