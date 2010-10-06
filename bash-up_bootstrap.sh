@@ -47,9 +47,7 @@ function source_files () {
 		fail "source_files requires the directory path to be given as argument" 2
 	fi
 	
-	if [ ! -d $1 ]; then
-		oops "Directory $1 does not exist!"
-	else
+	if [ -d $1 ]; then
 		find $1 -type f -maxdepth 1 | while read FILE
 		do
 			echo "$FILE"
