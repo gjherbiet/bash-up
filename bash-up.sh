@@ -75,7 +75,7 @@ function source_bashrc () {
 	do
 		if [ -f $BASHFILE ]; then
 			echo $BASHFILE
-			found=0
+			found=1
 		fi
 	done
 	
