@@ -36,9 +36,9 @@ else
 fi
 
 #
-# Sources all files in the "profile" directory of bash-up
+# Sources all files in the "profile" section of bash-up
 #
-source_matching_files "profile"
+source_section "profile"
 
 #
 # Sources the bashrc file

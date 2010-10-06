@@ -29,7 +29,7 @@ export BU_HOSTNAME=`hostname -s`
 # under the requested section
 # @param section name
 #
-function source_matching_files () {
+function source_section () {
 	if [ -z $1 ]; then
 		fail "source_matching_files requires the section name to be given as argument" 2
 	fi
@@ -74,7 +74,6 @@ function source_bashrc () {
 		oops "Unable to load your bash configuration file."
 	fi
 }
-
 
 #---------------------------------------------------------------------------
 # Output functions
