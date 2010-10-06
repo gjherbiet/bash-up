@@ -23,7 +23,7 @@
 # You only need to change this if you moved your bash-up installation dir.
 # TODO: set this by an install script.
 #
-export BU_DIRECTORY=$HOME/Development/bash-up
+export BU_DIRECTORY=$HOME/.bash-up
 
 #
 # Load bash-up
