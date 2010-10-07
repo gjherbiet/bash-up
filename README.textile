@@ -80,24 +80,18 @@ h3. The good-old fashion way
 
 If you don't want to use the installation script,  do the following to start using _bash-up_,:
 
-* *Back-up* your @~/.profile@ and @~/.bashrc@ (or @~/.bash_profile_@) files.
+# *Back-up* your @~/.profile@ and @~/.bashrc@ (or @~/.bash_profile_@) files.
 These are important files for your system, and you'll be happy to find them back if _bash-up_ doesn't satisfy you.
-
-* *Back-up* your @~/.profile@ and @~/.bashrc@ (or @~/.bash_profile_@) files.
+# *Back-up* your @~/.profile@ and @~/.bashrc@ (or @~/.bash_profile_@) files.
 (Just to be sure you've done it...)
-
-* *Clone* this repository, or *download* the latest archive of the source to a given _bash_up_ directory
+# *Clone* this repository, or *download* the latest archive of the source to a given _bash_up_ directory
 (I assumed @~/.bash-up@ as default).
-
-* *Fill* as many *section* folders you want, with as many configuration files you want, using the hierarchy explained above
+# *Fill* as many *section* folders you want, with as many configuration files you want, using the hierarchy explained above
 (I give you _default_ and _profile_ to start with).
-
-* *Replace* your @~/.profile@ and @~/.bashrc@ (or @~/.bash_profile_@) files with the ones provided by _bash-up_ (@profile_template@ and @bashrc_template@ respectively). You can move them, copy them or create symbolic links to replace your original files, it really doesn't matter.
-
-* If *you used a non-default directory* to download _bash-up_, you need to *edit the* @BU DIRECTORY@ *variable* in both _bash-up_'s @.profile@ and _bash-up_'s @.bashrc@ files.
+# *Replace* your @~/.profile@ and @~/.bashrc@ (or @~/.bash_profile_@) files with the ones provided by _bash-up_ (@profile_template@ and @bashrc_template@ respectively). You can move them, copy them or create symbolic links to replace your original files, it really doesn't matter.
+# If *you used a non-default directory* to download _bash-up_, you need to *edit the* <code>BU_DIRECTORY</code> *variable* in both _bash-up_'s @.profile@ and _bash-up_'s @.bashrc@ files.
 Set this variable to point to the location where your _bash-up_ installation is located.
-
-* *Done!*
+# *Done!*
 
 Now, next time you'll log in or start a @bash@ session:
 
