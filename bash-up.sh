@@ -58,7 +58,7 @@ function source_dir () {
 	fi
 	
 	if [ -d $1 ]; then
-		find $1 -type f -maxdepth 1 | while read FILE
+		find $1 -type f -or -type l -maxdepth 1 | while read FILE
 		do
 			source "$FILE"
 		done
@@ -72,7 +72,7 @@ function source_bashrc () {
 	local found=0
 	for BASHFILE in $HOME/.bashrc $HOME/.bash_profile;
 	do
-		if [ -f $BASHFILE ]; then
+		if [[ -f $BASHFILE  || -l $BASHFILE ]]; then
 			source $BASHFILE
 			found=1
 		fi
