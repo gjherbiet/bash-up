@@ -21,7 +21,6 @@
 #
 # Define and export the bash-up directory.
 # You only need to change this if you moved your bash-up installation dir.
-# TODO: set this by an install script.
 #
 export BU_DIRECTORY=$HOME/.bash-up
 
