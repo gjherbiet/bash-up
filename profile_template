@@ -22,24 +22,28 @@
 # Define and export the bash-up directory.
 # You only need to change this if you moved your bash-up installation dir.
 #
-export BU_DIRECTORY=$HOME/.bash-up
+export BU_DIRECTORY=$HOME/Development/bash-up
+export BU_SYSTEM=`uname -s`
+export BU_HOSTNAME=`hostname -s`
 
-#
-# Load bash-up
-#
-if [ -f $BU_DIRECTORY/bash-up.sh ]; then
-	source $BU_DIRECTORY/bash-up.sh
-else
-	echo "[bash-up] Error: bash-up main setup file $BU_DIRECTORY/bash-up.sh not found" >&2
-	exit 1;
+SECTION=$BU_DIRECTORY/profile
+if [ -d $SECTION ]; then
+	for DIR in "$SECTION" "$SECTION/$BU_SYSTEM" "$SECTION/$BU_SYSTEM/$BU_HOSTNAME";
+	do
+		if [ -d $DIR ]; then
+			for FILE in $DIR/*;
+			do
+				if [ ! -d $FILE ]; then
+					source $FILE
+				fi
+			done
+		fi
+	done
 fi
 
-#
-# Sources all files in the "profile" section of bash-up
-#
-source_section "profile"
-
-#
-# Sources the bashrc file
-#
-source_bashrc
+for BASHFILE in $HOME/.bashrc $HOME/.bash_profile;
+do
+	if [ -e $BASHFILE ]; then
+		source $BASHFILE
+	fi
+done
