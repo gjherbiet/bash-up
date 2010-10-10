@@ -104,7 +104,7 @@ set_install_dir $BU_INSTALL_DIRECTORY/bashrc_template
 #
 # Link bash-up provided templates with the configuration files
 #
-say "Copying bash-up configuration files to your home."
+say "Linking bash-up configuration files to your home."
 link_template $BU_INSTALL_DIRECTORY/profile_template $HOME/.profile
 link_template $BU_INSTALL_DIRECTORY/bashrc_template $HOME/.bashrc
 
