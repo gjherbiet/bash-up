@@ -10,8 +10,6 @@ h3. Using @.profile@ and @.bashrc@ only as loaders of many many other files...
 
 In the _bash-up_ approach, the @.profile@ and @.bashrc@ files don't do anything but _sourcing_ other configuration files in your _bash-up_ directory.
 
-You will not declare *any* variable, alias or function in those two files (well, except the *one* needed by _bash-up_...).
-
 *Why oh why ?* Let's read next section...
 
 h3. A hierarchy of generic-to-specific files
@@ -103,8 +101,8 @@ Now, next time you'll log in or start a @bash@ session:
 
 h2. In further release (yes, this might come someday...)
 
-* Installation script
 * Finer operating system management (OS version, etc..)
+* Possibility to manage extra configuration files in _bash-up_ (@.gitconfig@, @.irbrc@, etc.)
 
 h2. Credits and references
 
