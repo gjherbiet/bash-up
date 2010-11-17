@@ -25,21 +25,21 @@
 
 # Say something on behalf of bash-up
 # @param array of things to say
-function say () {
-	echo "[bash-up]" $@
+function ohai () {
+	echo -e "\033[1;34m==>\033[00m" $@
 }
 
 # Warn about and incorrect operation
 # @param array of thins to say
 function oops () {
-	say "Warning: " $@ >&2
+	echo -e "\033[1;33m(!)\033[00m" $@ >&2
 }
 
 # Exit function/program with the given error code and message
 # @param a string to say
 # @param an int as exit code
 function fail () {
-	say "Error: " $1 >&2
+	echo -e "\033[1;31m!!!\033[00m" $1 >&2
 	exit $2;
 }
 
@@ -84,12 +84,12 @@ function set_install_dir () {
 # Get the current working directory
 #
 BU_INSTALL_DIRECTORY=`pwd`
-say "Using $BU_INSTALL_DIRECTORY as installation source directory."
+ohai "Using $BU_INSTALL_DIRECTORY as installation source directory."
 
 #
 # Backup the original configuration files if existing
 #
-say "Backing up your current configuration files."
+ohai "Backing up your current configuration files."
 backup $HOME/.profile
 backup $HOME/.bashrc
 backup $HOME/.bash_profile
@@ -97,19 +97,20 @@ backup $HOME/.bash_profile
 #
 # Update the install directory variable in the configuration files
 #
-say "Updating bash-up configuration files with your installation source directory."
+ohai "Updating bash-up configuration files with your installation source directory."
 set_install_dir $BU_INSTALL_DIRECTORY/profile_template
 set_install_dir $BU_INSTALL_DIRECTORY/bashrc_template
 
 #
 # Link bash-up provided templates with the configuration files
 #
-say "Linking bash-up configuration files to your home."
+ohai "Linking bash-up configuration files to your home."
 link_template $BU_INSTALL_DIRECTORY/profile_template $HOME/.profile
 link_template $BU_INSTALL_DIRECTORY/bashrc_template $HOME/.bashrc
 
-say "Done! To use bash-up, add your configuration files in $BU_INSTALL_DIRECTORY/profile"
-say "or in $BU_INSTALL_DIRECTORY/default"
-say "or create new section directories in $BU_INSTALL_DIRECTORY."
+ohai "Done!"
+echo "To use bash-up, add your configuration files in $BU_INSTALL_DIRECTORY/profile"
+echo "or in $BU_INSTALL_DIRECTORY/default"
+echo "or create new section directories in $BU_INSTALL_DIRECTORY."
 
 #---------------------------------------------------------------------------
