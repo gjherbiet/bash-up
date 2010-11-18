@@ -31,9 +31,11 @@ if [ -d $SECTION ]; then
 	for DIR in "$SECTION" "$SECTION/$BU_SYSTEM" "$SECTION/$BU_SYSTEM/$BU_HOSTNAME";
 	do
 		if [ -d $DIR ]; then
-			find $DIR -type f -or -type l -maxdepth 1 | while read FILE
+			for FILE in $DIR/*;
 			do
-				source $FILE
+				if [ ! -d $FILE ]; then
+					source $FILE
+				fi
 			done
 		fi
 	done
