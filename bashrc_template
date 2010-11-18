@@ -42,6 +42,7 @@ if [ -d $SECTION ]; then
 	 	if [ -d $DIR ]; then
 			find $DIR -type f -or -type l -maxdepth 1 | while read FILE
 			do
+				echo "Loading $FILE"
 				bash $FILE
 			done
 		fi
@@ -51,6 +52,28 @@ fi
 #
 # Source all the file in the standard directories
 #
+for SECTION in $BU_DIRECTORY/*;
+do
+	SECTION_NAME=`basename $SECTION`
+	if [[ -d $SECTION && $SECTION_NAME != "profile" \
+			&& $SECTION_NAME != "external" \
+			&& $SECTION_NAME != "scripts" \
+			&& $SECTION_NAME != "templates" \
+			&& $SECTION_NAME != "private" ]]; then
+		for DIR in "$SECTION" "$SECTION/$BU_SYSTEM" "$SECTION/$BU_SYSTEM/$BU_HOSTNAME";
+		do
+			if [ -d $DIR ]; then
+				for FILE in $DIR/*;
+				do
+					if [ ! -d $FILE ]; then
+						source $FILE
+					fi
+				done
+			fi
+		done
+	fi
+done
+
 find $BU_DIRECTORY/* -type d -maxdepth 0 | grep -Ev "(profile|external|scripts|templates|private)$" | while read SECTION;
 do
 	for DIR in "$SECTION" "$SECTION/$BU_SYSTEM" "$SECTION/$BU_SYSTEM/$BU_HOSTNAME";
@@ -58,7 +81,8 @@ do
 		if [ -d $DIR ]; then
 			find $DIR -type f -or -type l -maxdepth 1 | while read FILE
 			do
-				source $FILE
+				echo "Sourcing $FILE"
+				. $FILE
 			done
 		fi
 	done
@@ -75,6 +99,7 @@ if [ -d $SECTION ]; then
 			find $DIR -type f -or -type l -maxdepth 1 | while read FILE
 			do
 				LOCATION=$(echo $FILE | sed -e "s,$DIR,$HOME,")
+				echo "Linking $FILE to $LOCATION"
 				ln -fs "$FILE" "$LOCATION"
 			done
 		fi
