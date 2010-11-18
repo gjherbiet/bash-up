@@ -26,20 +26,57 @@ export BU_DIRECTORY=$HOME/Development/bash-up
 export BU_SYSTEM=`uname -s`
 export BU_HOSTNAME=`hostname -s`
 
-for SECTION in $BU_DIRECTORY/*;
+#
+# Create an alias to easily reload the confiugration
+#
+alias reload='source $BU_DIRECTORY/bashrc_template'
+
+#
+# Execute all the scripts in the "scripts" directory
+# Note: those scripts can generate/update files in the other sections
+#
+SECTION=$BU_DIRECTORY/scripts
+if [ -d $SECTION ]; then
+	for DIR in "$SECTION" "$SECTION/$BU_SYSTEM" "$SECTION/$BU_SYSTEM/$BU_HOSTNAME";
+	do
+	 	if [ -d $DIR ]; then
+			find $DIR -type f -or -type l -maxdepth 1 | while read FILE
+			do
+				bash $FILE
+			done
+		fi
+	done
+fi
+
+#
+# Source all the file in the standard directories
+#
+find $BU_DIRECTORY/* -type d -maxdepth 0 | grep -Ev "(profile|external|scripts|templates|private)$" | while read SECTION;
 do
-	SECTION_NAME=`basename $SECTION`
-	if [[ -d $SECTION && $SECTION_NAME != "profile" ]]; then
-		for DIR in "$SECTION" "$SECTION/$BU_SYSTEM" "$SECTION/$BU_SYSTEM/$BU_HOSTNAME";
-		do
-			if [ -d $DIR ]; then
-				for FILE in $DIR/*;
-				do
-					if [ ! -d $FILE ]; then
-						source $FILE
-					fi
-				done
-			fi
-		done
-	fi
+	for DIR in "$SECTION" "$SECTION/$BU_SYSTEM" "$SECTION/$BU_SYSTEM/$BU_HOSTNAME";
+	do
+		if [ -d $DIR ]; then
+			find $DIR -type f -or -type l -maxdepth 1 | while read FILE
+			do
+				source $FILE
+			done
+		fi
+	done
 done
+
+#
+# Create symbolic links to files in the "external" directory
+#
+SECTION=$BU_DIRECTORY/external
+if [ -d $SECTION ]; then
+	for DIR in "$SECTION" "$SECTION/$BU_SYSTEM" "$SECTION/$BU_SYSTEM/$BU_HOSTNAME";
+	do
+		if [ -d $DIR ]; then
+			find $DIR -type f -or -type l -maxdepth 1 | while read FILE
+			do
+				LOCATION=$(echo $FILE | sed -e "s,$DIR,$HOME,")
+				ln -fs "$FILE" "$LOCATION"
+			done
+		fi
+	done
+fi
