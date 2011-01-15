@@ -1,0 +1,35 @@
+[user]
+	name = Guillaume-Jean Herbiet
+	email = guillaume-jean@herbiet.net
+[alias]
+	unadd = reset HEAD
+	st = status
+	cm = commit
+	ch = checkout
+	sw = checkout
+	br = branch
+[receive]
+	denyCurrentBranch = ignore
+[color]
+	ui = auto
+	branch = auto
+	diff = auto
+	status = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = green
+	changed = red
+	untracked = yellow
+[merge]
+	tool = opendiff
+	summary = true
+[achievement]
+	upload = true
